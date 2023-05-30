@@ -6,13 +6,13 @@ from colorama import init, Fore, Back, Style
 # Initialize Colorama for colored console output
 init(autoreset=True)
 
-def scan_for_xss_vulnerabilities():
+def scan_for_xss_vulnerabilities(start_url):
     
-    # User input for the starting URL
-    start_url = input("Enter the starting URL: ")
+    print(Fore.BLUE + "Checking the URL for Cross Site Scripting (XSS)")
+    
 
     # Maximum depth to crawl
-    max_depth = int(input("Enter the max depth you want to check: "))
+    max_depth = int(input("Enter the max depth you want to check for XSS Scan: "))
 
     # Set of visited URLs to avoid revisiting the same page
     visited = set()
@@ -67,7 +67,7 @@ def scan_for_xss_vulnerabilities():
             to_visit.append((new_url, depth+1))
         
     # Print a message indicating the progress of the scan
-        print(Fore.BLACK + Back.YELLOW + f"{len(visited)} pages visited so far..." + Style.RESET_ALL)
+        print(Fore.BLACK + Back.YELLOW + f" {len(visited)} pages visited so far..." + Style.RESET_ALL)
 
 if __name__ == "__main__":
     scan_for_xss_vulnerabilities()

@@ -10,8 +10,8 @@ red = Fore.RED + Style.BRIGHT
 yellow = Fore.YELLOW + Style.BRIGHT
 
 
-def google_subdomains():
-    domain = input(Back.BLACK + Fore.CYAN + "Enter domain >> ")
+def google_subdomains(domain):
+    
     subdomains = []
 
     for i in range(10):
@@ -24,7 +24,7 @@ def google_subdomains():
             response.raise_for_status()  # raise exception for non-200 status codes
         except requests.exceptions.HTTPError as e:
             if e.response.status_code == 429:
-                print(yellow + "Google is rate limiting us. Try again later.")
+                print(yellow + " Google is rate limiting us. Try again later.")
             else:
                 print(red + f"Error {e.response.status_code} occurred.")
             return
@@ -46,11 +46,11 @@ def google_subdomains():
 
     # print subdomains
     if subdomains:
-        print(green + "Subdomains found:")
+        print(green + " Subdomains found:")
         for subdomain in set(subdomains):
             print(cyan + subdomain)
     else:
-        print(red + "No subdomains found.")
+        print(red + " No subdomains found.")
 
 
 if __name__ == "__main__":

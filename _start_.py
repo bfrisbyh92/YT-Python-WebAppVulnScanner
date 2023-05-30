@@ -1,13 +1,14 @@
 # Package Imports
 import colorama
 from colorama import Fore, Back, Style
+from urllib.parse import urlparse
 
 # My Imports
-from clickjack import ClickJacking
-from hostheader import HostHeader
-from subdomain import google_subdomains
-from reverseip import ReverseIP
-from xss_reflected import scan_for_xss_vulnerabilities
+from src.clickjack import ClickJacking
+from src.hostheader import HostHeader
+from src.subdomain import google_subdomains
+from src.reverseip import ReverseIP
+from src.xss_reflected import scan_for_xss_vulnerabilities
 
 colorama.init(autoreset=True)
 
@@ -34,42 +35,19 @@ I███████████████████].
 
 
 def Main():
-    print(tank)
-    print(banner)
-    print(yellow+"Github profile: https://github.com/bfrisbyh92")
-    print(green+"")
-    print(green+"Available Modules")
-    print(green+"")
-    print(green+"1. ClickJacking")
-    print(green+"2. Host Header Injection")
-    print(green+"3. Subdomain Enumeration")
-    print(green+"4. Reverse IP Lookup")
-    print(green +"5. XSS Reflected")
-    print(yellow+"")
-    # print(yellow+"Note: Type 'help' inside any module for more information.")
-    while True:
-        inp = input(Fore.GREEN + Back.BLACK + "Module »»-----------► ")
-        if inp == '1':
-            ClickJacking()
-        elif inp == '2':
-            HostHeader()
-        elif inp == '3':
-            google_subdomains()
-        elif inp == '4':
-            ReverseIP()
-        elif inp == '5':
-            scan_for_xss_vulnerabilities()
-        elif inp == 'help':
-            print(green + """
-               1. ClickJacking
-               2. Host Header Injection
-               3. Subdomain Enumeration
-               4. Reverse IP Lookup
-               5. XSS Reflected
-               """ + Style.RESET)
-        else:
-            print(red + "Invalid input. Please try again." + Style.RESET)
+    print(tank, "\n" ,banner)
+    print(green + "This tool checks for...\n\t\t1.Clickjacking\n\t\t2.Host header Injection\n\t\t3.Subdomain Enumeration\n\t\t4.Reverse IP\n\t\t5.Cross Site Scripting")
+    url = input(Back.BLACK + Fore.CYAN + "\n\nEnter host >> ")
+    if urlparse(url).scheme:
+        ClickJacking(url)   
+        HostHeader(url)   
+        google_subdomains(url)  
+        ReverseIP(url) 
+        scan_for_xss_vulnerabilities(url) 
 
+    else:
+        print(red + " The URL is not in proper format \n [+] Example : https://www.example.com or http://www.example.com\n" )
+            
 
 if __name__ == "__main__":
     Main()
